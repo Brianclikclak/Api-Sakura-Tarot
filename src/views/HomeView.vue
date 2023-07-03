@@ -1,9 +1,18 @@
 <script>
+import CardsComponent from '../components/CardsComponent.vue'
 
-import TarotCards from '../components/TarotCards.vue';
+
+
+
 </script>
 
+
 <template>
-  <TarotCards/>
-  <h3>coñooooo</h3>
+    <CardsComponent/>
 </template>
+
+
+
+
+
+ 
