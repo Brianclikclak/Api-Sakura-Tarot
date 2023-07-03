@@ -1,9 +1,9 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+<script>
+
+import TarotCards from '../components/TarotCards.vue';
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <TarotCards/>
+  <h3>coñooooo</h3>
 </template>

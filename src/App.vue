@@ -1,6 +1,9 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import { RouterLink, RouterView } from 'vue-router';
+import HomeView from '../src/views/HomeView.vue';
+import {getCardSakuraList} from '../src/service/apiService.js';
+ console.log(getCardSakuraList);
+ 
 </script>
 
 <template>
@@ -9,17 +12,11 @@ import HelloWorld from './components/HelloWorld.vue'
 
     
       
-
+<HomeView/>
       
-        <RouterLink to="/">Home</RouterLink>
-        
       
-    
-  
-
-  <RouterView />
 </template>
 
-<style scoped>
+<style>
 
 </style>
