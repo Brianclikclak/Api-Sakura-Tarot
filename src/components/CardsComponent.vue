@@ -1,35 +1,47 @@
 <script>
-  import { ref, onMounted } from 'vue';
-  import { getCardSakuraList } from '../service/apiService.js';
-  
-  export default {
-    setup() {
-      const sakuraCards = ref([]);
-  
-      onMounted(async () => {
-        sakuraCards.value = await getCardSakuraList();
-      });
-  console.log(sakuraCards);
-      return {
-        sakuraCards
-      };
+import { ref, onMounted } from 'vue';
+import { getCardSakuraList } from '../service/apiService.js';
+
+export default {
+  setup() {
+    const sakuraCards = ref([]);
+    const selectedCards = ref([]);
+
+    onMounted(async () => {
+      sakuraCards.value = await getCardSakuraList();
+    });
+
+    function borderMark(event, card) {
+      if (selectedCards.value.includes(card)) {
+        const index = selectedCards.value.indexOf(card);
+        selectedCards.value.splice(index, 1);
+        event.target.style.border = "";
+      } else if (selectedCards.value.length < 3) {
+        selectedCards.value.push(card);
+        event.target.style.border = "8px solid red";
+      }
     }
-  };
-  </script>
+
+    return {
+      sakuraCards,
+      selectedCards,
+      borderMark
+    };
+  }
+};
+</script>
 
 
 <template>
-    <div class="cards-container">
-        <div class="cards" v-for="card in sakuraCards" :key="card.id">
-            <img :src="card.sakuraCard" alt=""/>
-            <span>{{card.cardNumber}} {{card.kanji}} {{ card.englishName }} </span>
-            <span>{{card.meaning}} </span>
-        </div>
-        
-    </div> 
-       
-    
-  </template>
+  <div class="cards-container">
+    <div class="cards" v-for="card in sakuraCards" :key="card.id">
+      <img :src="card.sakuraCard" alt="" @click="borderMark($event, card)">
+        <span>{{ card.cardNumber }} {{ card.kanji }} {{ card.englishName }}</span>
+        <span>{{ card.meaning }}</span>
+     
+    </div>
+  </div>
+</template>
 
   <style scoped>
   @import url('https://fonts.cdnfonts.com/css/sakura');
@@ -49,6 +61,7 @@
   gap: 1em;
   width: 250px;
   margin: 10px;
+  
   
 }
 
