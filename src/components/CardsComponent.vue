@@ -1,8 +1,8 @@
 <script>
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
-  
-// import { RouterLink } from 'vue-router';
+  import { RouterLink } from 'vue-router';
+
   export default {
 
     setup() {
@@ -15,14 +15,14 @@
             sakuraCards
         };
     },
-    // components: { RouterLink, RouterView }
+    
 };
   </script>
 
 
 <template>
     <button class="selectedCards">
-      <RouterLink to="/cards"></RouterLink>
+      <RouterLink to="/cards"> Mostrar cartas seleccionadas </RouterLink>
     </button>
     <div class="cards-container">
         <div class="cards" v-for="card in sakuraCards" :key="card.id">
@@ -33,9 +33,9 @@
         
     </div> 
     
-    <RouterView/>
-       
     
+       
+    <RouterView/>
   </template>
 
   <style scoped>
