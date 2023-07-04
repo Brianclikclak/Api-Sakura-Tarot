@@ -2,23 +2,28 @@
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
   
+// import { RouterLink } from 'vue-router';
   export default {
+
     setup() {
-      const sakuraCards = ref([]);
-  
-      onMounted(async () => {
-        sakuraCards.value = await getCardSakuraList();
-      });
-  console.log(sakuraCards);
-      return {
-        sakuraCards
-      };
-    }
-  };
+        const sakuraCards = ref([]);
+        onMounted(async () => {
+            sakuraCards.value = await getCardSakuraList();
+        });
+        console.log(sakuraCards);
+        return {
+            sakuraCards
+        };
+    },
+    // components: { RouterLink, RouterView }
+};
   </script>
 
 
 <template>
+    <button class="selectedCards">
+      <RouterLink to="/cards"></RouterLink>
+    </button>
     <div class="cards-container">
         <div class="cards" v-for="card in sakuraCards" :key="card.id">
             <img :src="card.sakuraCard" alt=""/>
@@ -27,6 +32,8 @@
         </div>
         
     </div> 
+    
+    <RouterView/>
        
     
   </template>

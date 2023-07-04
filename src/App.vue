@@ -6,7 +6,7 @@
 <template>
   
       <RouterLink to="/"></RouterLink>
-    
+      <RouterLink to="/cards"></RouterLink>
       <RouterView/>
   
 </template>
