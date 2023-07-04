@@ -1,11 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import SelectedCards from '../views/SelectedCards.vue';
-import vue from 'vue';
-import Router from 'vue-router';
-vue.use(Router);
 
-Router = createRouter({
+
+const  router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
