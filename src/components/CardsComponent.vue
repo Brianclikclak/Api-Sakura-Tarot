@@ -7,6 +7,8 @@ export default {
   setup() {
     const sakuraCards = ref([]);
     const selectedCards = ref([]);
+    const cardStatus = ref("Seleccione una carta para ver su pasado");
+    const showLink = ref (false);
 
     onMounted(async () => {
       sakuraCards.value = await getCardSakuraList();
@@ -21,22 +23,39 @@ export default {
         selectedCards.value.push(card);
         event.target.style.border = "8px solid red";
       }
+      if (selectedCards.value.length === 0){
+        cardStatus.value = "Seleccione una carta para ver su pasado";
+      } else if (selectedCards.value.length === 1) {
+        cardStatus.value = "Ahora seleccione una carta para ver su presente";
+      } else if (selectedCards.value.length === 2) {
+        cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
+        showLink.value = false;
+      } else if (selectedCards.value.length === 3) {
+        cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
+        showLink.value = true;
+      } 
     }
 
     return {
       sakuraCards,
       selectedCards,
+      cardStatus,
+      showLink,
       borderMark
+      
     };
-  }
+  },
 };
 </script>
 
 
 <template>
-    <button class="selectedCards">
-      <RouterLink to="/cards"> Mostrar cartas seleccionadas </RouterLink>
-    </button>
+  <div class="status">{{ cardStatus }} </div>
+  <div class="btn" v-if="showLink">
+    <!-- <button class="selectedCards"> -->
+      <RouterLink to="/cards" class="btn-card"> Mostrar cartas seleccionadas </RouterLink>
+    <!-- </button> -->
+  </div>
       <div class="cards-container">
     <div class="cards" v-for="card in sakuraCards" :key="card.id">
       <img :src="card.sakuraCard" alt="" @click="borderMark($event, card)">
@@ -53,6 +72,25 @@ export default {
   <style scoped>
   @import url('https://fonts.cdnfonts.com/css/sakura');
 
+ .status{
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: 'Sakura', sans-serif;
+  font-size: 30px;
+ }
+ .btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+ }
+ .btn-card{
+  text-decoration: none;
+  background-color: pink;
+  border-radius: 5px;
+  font-family: 'Sakura', sans-serif;
+  color: darkmagenta;
+ }
  
 .cards-container{
   display: flex;
