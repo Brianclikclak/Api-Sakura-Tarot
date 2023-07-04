@@ -1,4 +1,23 @@
 <script>
+  import { ref, onMounted } from 'vue';
+  import { getCardSakuraList } from '../service/apiService.js';
+  import { RouterLink } from 'vue-router';
+
+  export default {
+
+    setup() {
+        const sakuraCards = ref([]);
+        onMounted(async () => {
+            sakuraCards.value = await getCardSakuraList();
+        });
+        console.log(sakuraCards);
+        return {
+            sakuraCards
+        };
+    },
+    
+};
+  </script>
 import { ref, onMounted } from 'vue';
 import { getCardSakuraList } from '../service/apiService.js';
 
@@ -33,6 +52,22 @@ export default {
 
 
 <template>
+    <button class="selectedCards">
+      <RouterLink to="/cards"> Mostrar cartas seleccionadas </RouterLink>
+    </button>
+    <div class="cards-container">
+        <div class="cards" v-for="card in sakuraCards" :key="card.id">
+            <img :src="card.sakuraCard" alt=""/>
+            <span>{{card.cardNumber}} {{card.kanji}} {{ card.englishName }} </span>
+            <span>{{card.meaning}} </span>
+        </div>
+        
+    </div> 
+    
+    
+       
+    <RouterView/>
+  </template>
   <div class="cards-container">
     <div class="cards" v-for="card in sakuraCards" :key="card.id">
       <img :src="card.sakuraCard" alt="" @click="borderMark($event, card)">

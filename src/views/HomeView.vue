@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import CardsComponent from '../components/CardsComponent.vue'
 
 
