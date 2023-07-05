@@ -1,7 +1,6 @@
 <script>
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
-  import { RouterLink } from 'vue-router';
 
 export default {
   setup() {
@@ -30,8 +29,8 @@ export default {
       } else if (selectedCards.value.length === 2) {
         cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
         showLink.value = false;
-      } else if (selectedCards.value.length === 3) {
-        cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
+      } else {
+        cardStatus.value = "";
         showLink.value = true;
       } 
     }
@@ -60,14 +59,9 @@ export default {
       <div class="cards-container">
     <div class="cards" v-for="card in sakuraCards" :key="card.id">
       <img :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
-        <!-- <span>{{ card.cardNumber }} {{ card.kanji }} {{ card.englishName }}</span>
-        <span>{{ card.meaning }}</span> -->
-     
         </div>
         
     </div> 
-      
-    <RouterView/>
 </template>
 
   <style scoped>
@@ -108,8 +102,7 @@ export default {
   gap: 1em;
   width: 250px;
   margin: 10px;
-  
-  
+
 }
 
 span{
