@@ -52,15 +52,16 @@ export default {
 <template>
   <div class="status">{{ cardStatus }} </div>
   <div class="btn" v-if="showLink">
-    <!-- <button class="selectedCards"> -->
-      <RouterLink to="/cards" class="btn-card"> Mostrar cartas seleccionadas </RouterLink>
-    <!-- </button> -->
+    
+      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards) } }" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
+
   </div>
+
       <div class="cards-container">
     <div class="cards" v-for="card in sakuraCards" :key="card.id">
-      <img :src="card.sakuraCard" alt="" @click="borderMark($event, card)">
-        <span>{{ card.cardNumber }} {{ card.kanji }} {{ card.englishName }}</span>
-        <span>{{ card.meaning }}</span>
+      <img :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
+        <!-- <span>{{ card.cardNumber }} {{ card.kanji }} {{ card.englishName }}</span>
+        <span>{{ card.meaning }}</span> -->
      
         </div>
         
@@ -90,6 +91,7 @@ export default {
   border-radius: 5px;
   font-family: 'Sakura', sans-serif;
   color: darkmagenta;
+  font-size: 30px;
  }
  
 .cards-container{
