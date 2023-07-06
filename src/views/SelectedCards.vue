@@ -6,3 +6,5 @@ import CardDetails from '../components/CardDetails.vue'
     <CardDetails/>
 
 </template>
+
+
