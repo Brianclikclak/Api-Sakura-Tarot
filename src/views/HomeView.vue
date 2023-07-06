@@ -14,8 +14,8 @@ import CardsComponent from '../components/CardsComponent.vue'
 <style>
 
 body{
-    background-image: url(../images/tarotImage.jpg);
-    background-size:contain;
+    /* background-image: url(../images/tarotImage.jpg);
+    background-size:contain; */
 }
 
 
