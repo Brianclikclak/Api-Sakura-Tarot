@@ -73,7 +73,12 @@
 span{
   font-family: 'Sakura', sans-serif;
   text-align: center;
-  font-size: 15px;
+  font-size: 19px;
+  color:#FDAA08;
+  margin-top: 20px;
+  border: 1px dashed white;
+ 
+  
   
 }
 .btn{
@@ -84,10 +89,9 @@ span{
 }
 .btn-card , .discover{
   text-decoration: none;
-  background-color: pink;
   border-radius: 5px;
   font-family: 'Sakura', sans-serif;
-  color: darkmagenta;
+  color: #FDAA08;
   font-size: 20px;
   
 }
@@ -103,3 +107,4 @@ span{
 
 
 </style>
+
