@@ -24,8 +24,8 @@
 <div class="container">
     <div class="cards-container" v-for="card in selectedCards" :key="card.id">
         <div class="cards" :class="{flipped: discoverCards}" >
-            <img  class="cards-back" :src="card.cardsReverse.sakuraReverse" alt="">
-            <img class="cards-front" :src="card.sakuraCard" alt="">
+            <img  class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
+            <img class="cards-back" :src="card.sakuraCard" alt="">
         </div>
 
        <div class="meaning" > 
