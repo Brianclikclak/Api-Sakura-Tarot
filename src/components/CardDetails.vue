@@ -21,13 +21,14 @@
 <template>
  
 
-<div class="card-container">
-    <div class="cards" v-for="card in selectedCards" :key="card.id">
-        <div class="cards-back" >
-            <img :src="card.cardsReverse.sakuraReverse" alt="">
+<div class="container">
+    <div class="cards-container" v-for="card in selectedCards" :key="card.id">
+        <div class="cards" :class="{flipped: discoverCards}" >
+            <img  class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
+            <img class="cards-back" :src="card.sakuraCard" alt="">
         </div>
-       <div class="cards-front" >
-            <img :src="card.sakuraCard" alt="">
+
+       <div class="meaning" > 
           <span>{{ card.kanji }} {{ card.englishName }}</span>
             <span>{{ card.meaning }}</span> 
         </div>
@@ -40,36 +41,59 @@
 </template>
 
 <style scoped>
-.card-container {
+
+.container{
+    display: flex;
+}
+.cards-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
+    gap: 10em;
+    width: 100%;
+
 }
 
-.card{
+
+.cards{
     position: relative;
     margin: 10px;
     width: 250px;
     height: 350px;
+    perspective: 1000px;
 }
+.flipped .cards-front {
+  transform: rotateY(-180deg);
+}
+.flipped .cards-back {
+  transform: rotateY(0);
+}
+
 
 .cards-front , .cards-back {
     display: flex;
     flex-direction: column;
     margin: 10px;
     width: 220px;
+    transition: transform 2s ease;
+    backface-visibility:hidden;
+    transform-style: preserve-3d;
 }
 
 .cards-back{
     position: absolute;
-    z-index:2;
+    z-index:1;
+    transform: rotateY(180deg);
 }
 
 .cards-front{ 
-    position: relative;
-    z-index: 1;
+    position: absolute;
+    z-index: 2;
 }
 
+.meaning {
+    text-align: center;
+}
 span{
   font-family: 'Sakura', sans-serif;
   text-align: center;
@@ -98,10 +122,21 @@ span{
 
 .discover{
     margin-right: 50px;
+    cursor: pointer;
+}
+.discover:hover{
+    background-color: darkmagenta;
+    color: pink;
 }
 
 .btn-card{
     padding-top: 5px;
+    
+}
+
+.btn-card:hover{
+    background-color: darkmagenta;
+    color: pink;
 }
 
 
