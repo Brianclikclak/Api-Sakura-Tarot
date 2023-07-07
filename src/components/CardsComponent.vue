@@ -1,9 +1,9 @@
-<script>
+<script setup>
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
 
-export default {
-  setup() {
+
+   
     const sakuraCards = ref([]);
     const selectedCards = ref([]);
     const cardStatus = ref("Seleccione una carta para ver su pasado");
@@ -35,16 +35,9 @@ export default {
       } 
     }
 
-    return {
-      sakuraCards,
-      selectedCards,
-      cardStatus,
-      showLink,
-      borderMark
-      
-    };
-  },
-};
+   
+  
+
 </script>
 
 
@@ -73,6 +66,8 @@ export default {
   font-weight: bold;
   font-family: 'Sakura', sans-serif;
   font-size: 30px;
+  color: pink
+  
  }
  .btn {
   display: flex;
@@ -102,6 +97,7 @@ export default {
   gap: 1em;
   width: 250px;
   margin: 10px;
+  cursor: pointer;
 
 }
 
