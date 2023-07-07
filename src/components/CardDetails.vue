@@ -118,10 +118,21 @@ span{
 
 .discover{
     margin-right: 50px;
+    cursor: pointer;
+}
+.discover:hover{
+    background-color: darkmagenta;
+    color: pink;
 }
 
 .btn-card{
     padding-top: 5px;
+    
+}
+
+.btn-card:hover{
+    background-color: darkmagenta;
+    color: pink;
 }
 
 
