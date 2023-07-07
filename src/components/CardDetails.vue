@@ -125,8 +125,8 @@ span{
     cursor: pointer;
 }
 .discover:hover{
-    background-color: darkmagenta;
-    color: pink;
+    background-color:  #FDAA08;
+    color: aliceblue;
 }
 
 .btn-card{
@@ -135,8 +135,8 @@ span{
 }
 
 .btn-card:hover{
-    background-color: darkmagenta;
-    color: pink;
+    background-color:  #FDAA08;
+    color: aliceblue;
 }
 
 

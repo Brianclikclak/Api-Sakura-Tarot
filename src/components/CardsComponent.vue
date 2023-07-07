@@ -21,6 +21,7 @@
       } else if (selectedCards.value.length < 3) {
         selectedCards.value.push(card);
         event.target.style.border = "12px dashed #FDAA08";
+        event.target.style.animation = "border-color-animation 2s infinite";
       }
       if (selectedCards.value.length === 0){
         cardStatus.value = "Seleccione una carta para ver su pasado";
@@ -66,12 +67,7 @@
   font-weight: bold;
   font-family: 'Sakura', sans-serif;
   font-size: 30px;
-
   color: #FDAA08;
-
-  color: pink
-
-  
  }
  .btn {
   display: flex;
@@ -85,6 +81,13 @@
   font-family: 'Sakura', sans-serif;
   color: #FDAA08;
   font-size: 30px;
+  background-color: aliceblue;
+  padding: 10px;
+  text-decoration: none;
+ }
+ .btn-card:hover{
+  color: aliceblue;
+  background-color: #FDAA08;
  }
  
 .cards-container{
@@ -104,6 +107,18 @@
   cursor: pointer;
 
 }
+@keyframes border-color-animation {
+  0% {
+    border-color: #FDAA08;
+  }
+  50% {
+    border-color: #FF0000;
+  }
+  100% {
+    border-color: #FDAA08;
+  }
+}
+
 
 
 
