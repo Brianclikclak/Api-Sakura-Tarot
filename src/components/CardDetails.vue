@@ -1,29 +1,40 @@
+
+
 <script>
+
+
     export default{
         data() {
             return {
                 selectedCards: [],
                 discoverCards: false,
+                setTime: [],
+              
             };
         },
         methods:{
             toggleRotation (){
                 this.discoverCards = !this.discoverCards;
-            }
+               
+            },
         },
         created() {
             this.selectedCards = JSON.parse(this.$route.query.selectedCards);
-
+            this.setTime = JSON.parse(this.$route.query.setTime);
+           
         },
+      
     };
 </script>
 
 <template>
- 
 
 <div class="container">
-    <div class="cards-container" v-for="card in selectedCards" :key="card.id">
+    
+    <div class="cards-container" v-for="card in selectedCards" :key="card.id" >
+       
         <div class="cards" :class="{flipped: discoverCards}" >
+            <div class="time">{{ setTime }}</div>
             <img  class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
             <img class="cards-back" :src="card.sakuraCard" alt="">
         </div>
@@ -53,7 +64,9 @@
     width: 100%;
 
 }
-
+.time{
+    color: red;
+}
 
 .cards{
     position: relative;

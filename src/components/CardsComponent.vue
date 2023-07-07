@@ -2,11 +2,11 @@
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
 
-
    
     const sakuraCards = ref([]);
     const selectedCards = ref([]);
     const cardStatus = ref("Seleccione una carta para ver su pasado");
+    const setTime = ref([]);
     const showLink = ref (false);
 
     onMounted(async () => {
@@ -24,21 +24,22 @@
         event.target.style.animation = "border-color-animation 2s infinite";
       }
       if (selectedCards.value.length === 0){
-        cardStatus.value = "Seleccione una carta para ver su pasado";
+        cardStatus.value = "Seleccione una carta para ver su pasado";      
       } else if (selectedCards.value.length === 1) {
         cardStatus.value = "Ahora seleccione una carta para ver su presente";
+        setTime.value="PASADO"; 
       } else if (selectedCards.value.length === 2) {
         cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
+        setTime.value="PRESENTE";
         showLink.value = false;
-      } else {
+      } else if (selectedCards.value.length === 3){
+        setTime.value="FUTURO";
         cardStatus.value = "";
         showLink.value = true;
       } 
     }
 
    
-  
-
 </script>
 
 
@@ -46,7 +47,7 @@
   <div class="status">{{ cardStatus }} </div>
   <div class="btn" v-if="showLink">
     
-      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards) } }" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
+      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards), setTime: JSON.stringify(setTime) }}" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
 
   </div>
 
@@ -61,6 +62,7 @@
   <style scoped>
   @import url('https://fonts.cdnfonts.com/css/sakura');
 
+
  .status{
   text-align: center;
   margin-top: 40px;
@@ -69,12 +71,13 @@
   font-size: 30px;
   color: #FDAA08;
  }
+
  .btn {
   display: flex;
   justify-content: center;
   margin-top: 30px;
-
  }
+
  .btn-card{
   text-decoration: underline;
   border-radius: 5px;
@@ -85,6 +88,7 @@
   padding: 10px;
   text-decoration: none;
  }
+
  .btn-card:hover{
   color: aliceblue;
   background-color: #FDAA08;
@@ -102,8 +106,8 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  width: 250px;
-  margin: 10px;
+  width: 120px;
+  margin: 8px;
   cursor: pointer;
 
 }
@@ -118,8 +122,6 @@
     border-color: #FDAA08;
   }
 }
-
-
 
 
 </style>
