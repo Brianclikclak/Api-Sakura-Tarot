@@ -1,9 +1,9 @@
-<script>
+<script setup>
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
 
-export default {
-  setup() {
+
+   
     const sakuraCards = ref([]);
     const selectedCards = ref([]);
     const cardStatus = ref("Seleccione una carta para ver su pasado");
@@ -20,7 +20,8 @@ export default {
         event.target.style.border = "";
       } else if (selectedCards.value.length < 3) {
         selectedCards.value.push(card);
-        event.target.style.border = "8px solid red";
+        event.target.style.border = "12px dashed #FDAA08";
+        event.target.style.animation = "border-color-animation 2s infinite";
       }
       if (selectedCards.value.length === 0){
         cardStatus.value = "Seleccione una carta para ver su pasado";
@@ -35,16 +36,9 @@ export default {
       } 
     }
 
-    return {
-      sakuraCards,
-      selectedCards,
-      cardStatus,
-      showLink,
-      borderMark
-      
-    };
-  },
-};
+   
+  
+
 </script>
 
 
@@ -69,23 +63,31 @@ export default {
 
  .status{
   text-align: center;
-  margin-top: 10px;
+  margin-top: 40px;
   font-weight: bold;
   font-family: 'Sakura', sans-serif;
   font-size: 30px;
+  color: #FDAA08;
  }
  .btn {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+
  }
  .btn-card{
-  text-decoration: none;
-  background-color: pink;
+  text-decoration: underline;
   border-radius: 5px;
   font-family: 'Sakura', sans-serif;
-  color: darkmagenta;
+  color: #FDAA08;
   font-size: 30px;
+  background-color: aliceblue;
+  padding: 10px;
+  text-decoration: none;
+ }
+ .btn-card:hover{
+  color: aliceblue;
+  background-color: #FDAA08;
  }
  
 .cards-container{
@@ -102,15 +104,23 @@ export default {
   gap: 1em;
   width: 250px;
   margin: 10px;
+  cursor: pointer;
 
 }
-
-span{
-  font-family: 'Sakura', sans-serif;
-  text-align: center;
-  font-size: 15px;
-  
+@keyframes border-color-animation {
+  0% {
+    border-color: #FDAA08;
+  }
+  50% {
+    border-color: #FF0000;
+  }
+  100% {
+    border-color: #FDAA08;
+  }
 }
+
+
+
 
 </style>
   
