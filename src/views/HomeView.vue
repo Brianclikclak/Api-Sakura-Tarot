@@ -1,9 +1,5 @@
 <script setup>
 import CardsComponent from '../components/CardsComponent.vue'
-
-
-
-
 </script>
 
 
@@ -15,11 +11,9 @@ import CardsComponent from '../components/CardsComponent.vue'
 
 body{
 
-background: url(../images/background.jpg);
-background-size: auto;
+background: url(../images/pxfuel.jpg);
+background-size: cover;
 }
-
-
 
 </style>
 
