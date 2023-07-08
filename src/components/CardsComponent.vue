@@ -1,12 +1,14 @@
 <script setup>
   import { ref, onMounted } from 'vue';
   import { getCardSakuraList } from '../service/apiService.js';
+  import { RouterLink } from 'vue-router';
+
 
    
     const sakuraCards = ref([]);
     const selectedCards = ref([]);
     const cardStatus = ref("Seleccione una carta para ver su pasado");
-    const setTime = ref([]);
+    /* const setTime = ref("Pasado"); */
     const showLink = ref (false);
 
     onMounted(async () => {
@@ -27,13 +29,13 @@
         cardStatus.value = "Seleccione una carta para ver su pasado";      
       } else if (selectedCards.value.length === 1) {
         cardStatus.value = "Ahora seleccione una carta para ver su presente";
-        setTime.value="PASADO"; 
+        /* setTime.value="PASADO";  */
       } else if (selectedCards.value.length === 2) {
         cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
-        setTime.value="PRESENTE";
+        /* setTime.value="PRESENTE"; */
         showLink.value = false;
       } else if (selectedCards.value.length === 3){
-        setTime.value="FUTURO";
+        /* setTime.value="FUTURO"; */
         cardStatus.value = "";
         showLink.value = true;
       } 
@@ -47,7 +49,7 @@
   <div class="status">{{ cardStatus }} </div>
   <div class="btn" v-if="showLink">
     
-      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards), setTime: JSON.stringify(setTime) }}" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
+      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards) /* setTime: JSON.stringify(setTime) */ }}" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
 
   </div>
 
@@ -57,6 +59,7 @@
         </div>
         
     </div> 
+    <!-- <router-view/> -->
 </template>
 
   <style scoped>

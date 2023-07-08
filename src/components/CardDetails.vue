@@ -1,54 +1,61 @@
+<script setup>
+import { ref, defineProps } from 'vue';
+
+const props = defineProps ({
+    selectedCards: {
+        type: Object,
+    },
+    /* setTime: {
+        type: String,
+    }, */
+});
+const sortedCards = ref([...props.selectedCards].sort((a, b) => a.index - b.index));
 
 
-<script>
+sortedCards.value.forEach((card, index) => {
+    if (index === 0){
+        card.time = 'PASADO';
+    } else if (index === 1) {
+        card.time = 'PRESENTE';
+    } else if ( index === 2) {
+        card.time = 'FUTURO';
+    }
+    
+});
+const discoverCards = ref(false);
+const showMeaning = ref(false);
 
+function toggleRotation() {
+  discoverCards.value = !discoverCards.value;
+  showMeaning.value = !showMeaning.value;
+}
 
-    export default{
-        data() {
-            return {
-                selectedCards: [],
-                discoverCards: false,
-                setTime: [],
-              
-            };
-        },
-        methods:{
-            toggleRotation (){
-                this.discoverCards = !this.discoverCards;
-               
-            },
-        },
-        created() {
-            this.selectedCards = JSON.parse(this.$route.query.selectedCards);
-            this.setTime = JSON.parse(this.$route.query.setTime);
-           
-        },
-      
-    };
 </script>
 
 <template>
+  <div class="container">
+    <div class="cards-container" v-for="card in selectedCards" :key="card.id">
+      <div class="cards" :class="{ flipped: discoverCards }">
+        <div class="time"> {{ card.time }}</div>
+        <!-- <div class="time" v-if="setTime === 'Pasado'">PASADO</div>
+        <div class="time" v-else-if="setTime === 'Presente'">PRESENTE</div>
+        <div class="time" v-else-if="setTime === 'Futuro'">FUTURO</div> -->
+        <img class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
+        <img class="cards-back" :src="card.sakuraCard" alt="">
+      </div>
 
-<div class="container">
-    
-    <div class="cards-container" v-for="card in selectedCards" :key="card.id" >
-       
-        <div class="cards" :class="{flipped: discoverCards}" >
-            <div class="time">{{ setTime }}</div>
-            <img  class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
-            <img class="cards-back" :src="card.sakuraCard" alt="">
-        </div>
-
-       <div class="meaning" > 
-          <span>{{ card.kanji }} {{ card.englishName }}</span>
-            <span>{{ card.meaning }}</span> 
-        </div>
+      <div class="meaning">
+        <h3 v-if="showMeaning">{{ card.kanji }} {{ card.englishName }} </h3>
+        <span v-if="showMeaning">{{ card.meaning }}</span>
+      </div>
     </div>
-</div>
-<div class="btn">
-    <button class="discover" @click="toggleRotation">Veamos que dicen tus cartas</button>
-    <RouterLink to="/" class="btn-card">Reiniciar lectura </RouterLink>
-</div>
+  </div>
+  <!-- <div class="btn-container"> -->
+  <div class="btn">
+    <button class="discover" @click="toggleRotation">Veamos qué dicen tus cartas</button>
+    <router-link to="/" class="btn-card">Reiniciar lectura</router-link>
+  </div>
+<!-- </div> -->
 </template>
 
 <style scoped>
@@ -62,10 +69,13 @@
     justify-content: center;
     gap: 10em;
     width: 100%;
+    height: 400px;
 
 }
 .time{
-    color: red;
+    color: #FDAA08;
+    text-align: center;
+    font-weight: bolder;
 }
 
 .cards{
@@ -107,23 +117,28 @@
 .meaning {
     text-align: center;
 }
-span{
+h3, span{
   font-family: 'Sakura', sans-serif;
   text-align: center;
-  font-size: 19px;
+  font-size: 16px;
   color:#FDAA08;
   margin-top: 20px;
-  border: 1px dashed white;
- 
-  
-  
+  /* border: 1px dashed white; */
+  /* background-color: aliceblue; */
 }
+  
+
 .btn{
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 20px; */
+  position: fixed;
+  top: 45em;
+  left: 35em;
   
 }
+
+
 .btn-card , .discover{
   text-decoration: none;
   border-radius: 5px;
