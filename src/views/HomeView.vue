@@ -1,9 +1,5 @@
 <script setup>
 import CardsComponent from '../components/CardsComponent.vue'
-
-
-
-
 </script>
 
 
@@ -18,8 +14,6 @@ body{
 background: url(../images/background.jpg);
 background-size: auto;
 }
-
-
 
 </style>
 

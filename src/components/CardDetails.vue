@@ -5,9 +5,6 @@ const props = defineProps ({
     selectedCards: {
         type: Object,
     },
-    /* setTime: {
-        type: String,
-    }, */
 });
 const sortedCards = ref([...props.selectedCards].sort((a, b) => a.index - b.index));
 
@@ -33,57 +30,57 @@ function toggleRotation() {
 </script>
 
 <template>
-  <div class="container">
-    <div class="cards-container" v-for="card in selectedCards" :key="card.id">
-      <div class="cards" :class="{ flipped: discoverCards }">
-        <div class="time"> {{ card.time }}</div>
-        <!-- <div class="time" v-if="setTime === 'Pasado'">PASADO</div>
-        <div class="time" v-else-if="setTime === 'Presente'">PRESENTE</div>
-        <div class="time" v-else-if="setTime === 'Futuro'">FUTURO</div> -->
-        <img class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
-        <img class="cards-back" :src="card.sakuraCard" alt="">
-      </div>
-
-      <div class="meaning">
-        <h3 v-if="showMeaning">{{ card.kanji }} {{ card.englishName }} </h3>
-        <span v-if="showMeaning">{{ card.meaning }}</span>
-      </div>
+    <div class="btn">
+        <button class="discover" @click="toggleRotation">Veamos qué dicen tus cartas</button>
+        <router-link to="/" class="btn-card">Reiniciar lectura</router-link>
     </div>
-  </div>
-  <!-- <div class="btn-container"> -->
-  <div class="btn">
-    <button class="discover" @click="toggleRotation">Veamos qué dicen tus cartas</button>
-    <router-link to="/" class="btn-card">Reiniciar lectura</router-link>
-  </div>
-<!-- </div> -->
+
+    <div class="container">
+        <div class="cards-container" v-for="card in selectedCards" :key="card.id">
+        <div class="cards" :class="{ flipped: discoverCards }">
+            <span class="time"> {{ card.time }}</span>
+            <img class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
+            <img class="cards-back" :src="card.sakuraCard" alt="">
+        </div>
+
+        <div class="meaning">
+            <h3 v-if="showMeaning">{{ card.kanji }} {{ card.englishName }} </h3>
+            <span v-if="showMeaning">{{ card.meaning }}</span>
+        </div>
+
+        </div>
+    </div>
+
+  
 </template>
 
 <style scoped>
 
 .container{
     display: flex;
+    
 }
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10em;
-    width: 100%;
-    height: 400px;
-
+    row-gap: 5em;
 }
 .time{
+    font-family: 'Sakura', sans-serif;
     color: #FDAA08;
-    text-align: center;
     font-weight: bolder;
+    display: flex;
+    padding-bottom: 1em;
+    margin-left: 3.5em;
 }
 
 .cards{
     position: relative;
-    margin: 10px;
     width: 250px;
     height: 350px;
-    perspective: 1000px;
+    margin-left: 3em;
+    
 }
 .flipped .cards-front {
   transform: rotateY(-180deg);
@@ -92,12 +89,10 @@ function toggleRotation() {
   transform: rotateY(0);
 }
 
-
 .cards-front , .cards-back {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    width: 220px;
+    width: 180px;
     transition: transform 2s ease;
     backface-visibility:hidden;
     transform-style: preserve-3d;
@@ -105,69 +100,58 @@ function toggleRotation() {
 
 .cards-back{
     position: absolute;
-    z-index:1;
     transform: rotateY(180deg);
 }
 
 .cards-front{ 
     position: absolute;
-    z-index: 2;
 }
 
 .meaning {
     text-align: center;
+    width: 250px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+ 
 }
+
 h3, span{
   font-family: 'Sakura', sans-serif;
-  text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color:#FDAA08;
-  margin-top: 20px;
-  /* border: 1px dashed white; */
-  /* background-color: aliceblue; */
 }
   
 
 .btn{
-  /* display: flex;
-  justify-content: center;
-  margin-top: 20px; */
-  position: fixed;
-  top: 45em;
-  left: 35em;
-  
+  display: flex;
+  margin: 2em;
+  justify-content: space-evenly;
 }
-
 
 .btn-card , .discover{
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-family: 'Sakura', sans-serif;
   color: #FDAA08;
   font-size: 20px;
-  
-}
-
-.discover{
-    margin-right: 50px;
-    cursor: pointer;
-}
-.discover:hover{
-    background-color:  #FDAA08;
-    color: aliceblue;
 }
 
 .btn-card{
-    padding-top: 5px;
-    
+    padding-top:0.2em;
+}
+
+.discover{
+    cursor: pointer;
+}
+
+.discover:hover{
+    background-color:  #FDAA08;
+    color: aliceblue;
 }
 
 .btn-card:hover{
     background-color:  #FDAA08;
     color: aliceblue;
 }
-
-
 
 </style>
 

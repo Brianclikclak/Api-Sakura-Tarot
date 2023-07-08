@@ -4,11 +4,9 @@
   import { RouterLink } from 'vue-router';
 
 
-   
     const sakuraCards = ref([]);
     const selectedCards = ref([]);
     const cardStatus = ref("Seleccione una carta para ver su pasado");
-    /* const setTime = ref("Pasado"); */
     const showLink = ref (false);
 
     onMounted(async () => {
@@ -29,13 +27,10 @@
         cardStatus.value = "Seleccione una carta para ver su pasado";      
       } else if (selectedCards.value.length === 1) {
         cardStatus.value = "Ahora seleccione una carta para ver su presente";
-        /* setTime.value="PASADO";  */
       } else if (selectedCards.value.length === 2) {
         cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
-        /* setTime.value="PRESENTE"; */
         showLink.value = false;
       } else if (selectedCards.value.length === 3){
-        /* setTime.value="FUTURO"; */
         cardStatus.value = "";
         showLink.value = true;
       } 
@@ -47,28 +42,25 @@
 
 <template>
   <div class="status">{{ cardStatus }} </div>
-  <div class="btn" v-if="showLink">
-    
-      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards) /* setTime: JSON.stringify(setTime) */ }}" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
+    <div class="btn" v-if="showLink">
+      <RouterLink :to="{ path: '/cards', query: { selectedCards: JSON.stringify(selectedCards)}}" class="btn-card">Mostrar cartas seleccionadas</RouterLink>
+    </div>
 
-  </div>
-
-      <div class="cards-container">
-    <div class="cards" v-for="card in sakuraCards" :key="card.id">
-      <img :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
-        </div>
-        
+    <div class="cards-container">
+        <div class="cards" v-for="card in sakuraCards" :key="card.id">
+            <img :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
+          </div>  
     </div> 
-    <!-- <router-view/> -->
+
 </template>
 
   <style scoped>
   @import url('https://fonts.cdnfonts.com/css/sakura');
-
+  
 
  .status{
   text-align: center;
-  margin-top: 40px;
+  margin-top: 30px;
   font-weight: bold;
   font-family: 'Sakura', sans-serif;
   font-size: 30px;
@@ -86,7 +78,7 @@
   border-radius: 5px;
   font-family: 'Sakura', sans-serif;
   color: #FDAA08;
-  font-size: 30px;
+  font-size: 20px;
   background-color: aliceblue;
   padding: 10px;
   text-decoration: none;
@@ -112,8 +104,8 @@
   width: 120px;
   margin: 8px;
   cursor: pointer;
-
 }
+
 @keyframes border-color-animation {
   0% {
     border-color: #FDAA08;
@@ -125,7 +117,6 @@
     border-color: #FDAA08;
   }
 }
-
 
 </style>
   
