@@ -35,10 +35,12 @@ function toggleRotation() {
         <router-link to="/" class="btn-card">Reiniciar lectura</router-link>
     </div>
 
+
     <div class="container">
         <div class="cards-container" v-for="card in selectedCards" :key="card.id">
+          <span class="time"> {{ card.time }}</span>
         <div class="cards" :class="{ flipped: discoverCards }">
-            <span class="time"> {{ card.time }}</span>
+            
             <img class="cards-front" :src="card.cardsReverse.sakuraReverse" alt="">
             <img class="cards-back" :src="card.sakuraCard" alt="">
         </div>
@@ -50,7 +52,7 @@ function toggleRotation() {
 
         </div>
     </div>
-
+    
   
 </template>
 
@@ -58,21 +60,23 @@ function toggleRotation() {
 
 .container{
     display: flex;
+    justify-content: center;
+    gap: 3em;
+    flex-wrap: wrap;
+    padding: 5em;
     
 }
 .cards-container {
     display: flex;
-    flex-wrap: wrap;
+    
+    flex-direction: column;
     justify-content: center;
     row-gap: 5em;
 }
 .time{
-    font-family: 'Sakura', sans-serif;
-    color: #FDAA08;
-    font-weight: bolder;
-    display: flex;
-    padding-bottom: 1em;
-    margin-left: 3.5em;
+  font-family: 'Sakura', sans-serif; 
+    text-align: center;
+    margin-right: 2em;
 }
 
 .cards{
@@ -116,14 +120,17 @@ function toggleRotation() {
 
 h3, span{
   font-family: 'Sakura', sans-serif;
-  font-size: 14px;
-  color:#FDAA08;
+  font-size: 18px;
+  /* text-align: center; */
+  color:#f56a6a;
 }
   
 
 .btn{
   display: flex;
-  margin: 2em;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin: 3em;
   justify-content: space-evenly;
 }
 
@@ -131,12 +138,13 @@ h3, span{
   text-decoration: none;
   border-radius: 8px;
   font-family: 'Sakura', sans-serif;
-  color: #FDAA08;
+  color: #f56a6a;
   font-size: 20px;
 }
 
 .btn-card{
     padding-top:0.2em;
+    background-color: aliceblue;
 }
 
 .discover{
@@ -144,12 +152,12 @@ h3, span{
 }
 
 .discover:hover{
-    background-color:  #FDAA08;
+    background-color:  #f56a6a;
     color: aliceblue;
 }
 
 .btn-card:hover{
-    background-color:  #FDAA08;
+    background-color:  #f56a6a;
     color: aliceblue;
 }
 
