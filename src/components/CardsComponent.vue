@@ -20,8 +20,8 @@
         event.target.style.border = "";
       } else if (selectedCards.value.length < 3) {
         selectedCards.value.push(card);
-        event.target.style.border = "12px dashed #FDAA08";
-        event.target.style.animation = "border-color-animation 2s infinite";
+        event.target.classList.add("borderMovement");
+        event.target.style.border = "10px solid #FDAA08";
       }
       if (selectedCards.value.length === 0){
         cardStatus.value = "Seleccione una carta para ver su pasado";      
@@ -48,7 +48,7 @@
 
     <div class="cards-container">
         <div class="cards" v-for="card in sakuraCards" :key="card.id">
-            <img :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
+            <img class="img-reverse" :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
           </div>  
     </div> 
 
@@ -64,7 +64,7 @@
   font-weight: bold;
   font-family: 'Sakura', sans-serif;
   font-size: 30px;
-  color: #FDAA08;
+  color: #f56a6a;
  }
 
  .btn {
@@ -77,7 +77,7 @@
   text-decoration: underline;
   border-radius: 5px;
   font-family: 'Sakura', sans-serif;
-  color: #FDAA08;
+  color: #f56a6a;
   font-size: 20px;
   background-color: aliceblue;
   padding: 10px;
@@ -86,7 +86,7 @@
 
  .btn-card:hover{
   color: aliceblue;
-  background-color: #FDAA08;
+  background-color: #f56a6a
  }
  
 .cards-container{
@@ -95,6 +95,7 @@
   justify-content: center;
   margin: 50px auto;
   gap: 2em;
+  height: 100%;
 }
 
 .cards{
@@ -106,18 +107,21 @@
   cursor: pointer;
 }
 
-@keyframes border-color-animation {
+@keyframes borderMovement {
   0% {
-    border-color: #FDAA08;
+    border-color: #fdca40;
   }
   50% {
-    border-color: #FF0000;
+    border-color: #f56a6a;
   }
   100% {
-    border-color: #FDAA08;
+    border-color: #fdca40;
   }
 }
 
-</style>
-  
+
+.borderMovement {
+  animation: borderMovement 1s linear infinite;
+}
+ </style>
   
