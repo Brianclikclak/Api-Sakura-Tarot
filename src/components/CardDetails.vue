@@ -68,9 +68,9 @@ function toggleRotation() {
 }
 .cards-container {
     display: flex;
-    
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
+    align-content: center;
     row-gap: 5em;
 }
 .time{
@@ -113,7 +113,7 @@ function toggleRotation() {
 
 .meaning {
     text-align: center;
-    width: 250px;
+    width: 270px;
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
  
 }
