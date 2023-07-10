@@ -9,60 +9,25 @@
       type: Object,
       default: null
     },
+
+    borderMark: {
+      type: Function,
+      
+    }
     /* cardStatus: {
       type: String,
       default: "Seleccione una carta para ver su pasado"
     }, */
-    showLink: {
+    /* selectedCards:{
+      type: Function
+    } */
+
+    /* showLink: {
       type: Boolean,
       default: false
-    }
+    } */
   });
 
-
-
-
-
-    /* const sakuraCards = ref([]); */
-    /* const selectedCards = ref([]);
-    const cardStatus = ref("Seleccione una carta para ver su pasado");
-    const showLink = ref (false); */
-
-    /* onMounted(async () => {
-      sakuraCards.value = await getCardSakuraList();
-    }); */
-
-    /* function borderMark(event, card) {
-  const index = selectedCards.value.indexOf(card);
-  
-  if (index !== -1) {
-    selectedCards.value.splice(index, 1);
-    event.target.style.border = "";
-  } else if (selectedCards.value.length < 3) {
-    selectedCards.value.push(card);
-    event.target.style.border = "8px solid red";
-  }
-  switch(selectedCards.value.length) {
-    case 0:
-      cardStatus.value = "Seleccione una carta para ver su pasado";
-      break;
-    case 1:
-      cardStatus.value = "Ahora seleccione una carta para ver su presente";
-      break;
-    case 2:
-      cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
-      showLink.value = false;
-      break;
-    default:
-      cardStatus.value = "";
-      showLink.value = true;
-      break;
-  }
-} */
-
-      
- 
-  
 
 </script>
 
@@ -88,7 +53,7 @@
       
       
   </h1> -->
-  <img :src="card.cardsReverse.sakuraReverse" alt="" @click="borderMark($event, card)">
+  <img :src="card.cardsReverse.sakuraReverse" alt="" >
 </div>
     
 </template>

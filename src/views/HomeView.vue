@@ -1,71 +1,65 @@
 <script setup>
 import CardsComponent from '../components/CardsComponent.vue'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { getCardSakuraList } from '../service/apiService';
 
   let sakuraCards = ref([])
+  const cardStatus = ref("Seleccione una carta para ver su pasado tio");
+  const selectedCards = ref([]);
+  const showLink = ref(false)
 
   onMounted(async()=>{
   sakuraCards.value = await getCardSakuraList()
-  console.log(sakuraCards);
-  }) 
-    
-/* const selectedCards = ref([]) */
-  /* function borderMark(event, card) {
-  const index = selectedCards.value.indexOf(card);
+  })
 
-    const sakuraCards = ref([]);
-    const selectedCards = ref([]);
-    const cardStatus = ref("Seleccione una carta para ver su pasado");
-    const showLink = ref (false);
-    onMounted(() => {
-        
-    }),(async () => {
-      sakuraCards.value = await getCardSakuraList();
-    });
-  
-  if (index !== -1) {
-    selectedCards.value.splice(index, 1);
-    event.target.style.border = "";
-  } else if (selectedCards.value.length < 3) {
-    selectedCards.value.push(card);
-    event.target.style.border = "8px solid red";
+  function addCard(card){
+    selectedCards.value.push(card)
+    // border(card)
+    card.style.border="red"
   }
-  switch(selectedCards.value.length) {
-    case 0:
-      cardStatus.value = "Seleccione una carta para ver su pasado";
-      break;
-    case 1:
-      cardStatus.value = "Ahora seleccione una carta para ver su presente";
-      break;
-    case 2:
-      cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
-      showLink.value = false;
-      break;
-    default:
-      cardStatus.value = "";
+
+  function border(card){
+    // card.style.border="10px"
+    // card.style.borderStyle="10px"
+    card.style.border="red"
+  }
+  console.log(selectedCards.value)
+
+  const estoEsLaComputed = computed(() => {      
+    if(selectedCards.value.length === 0) return cardStatus.value = "Seleccione una carta para ver su pasado";
+    if(selectedCards.value.length === 1) return cardStatus.value = "Ahora seleccione una carta para ver su presente";
+    if(selectedCards.value.length === 2) return cardStatus.value = "Por ultimo seleccione una carta para ver su futuro";
+    if(selectedCards.value.length === 3){
       showLink.value = true;
-      break;
-  }
-} */
+      return  cardStatus.value = "";
+    }
+  })  
 </script>
 
 
 <template>
-    
+    <header>
+      <span> {{ estoEsLaComputed }}</span>
+    </header>
     <main>
-        <CardsComponent v-for="card in sakuraCards" :card="card"/>  
+      
+        <CardsComponent v-for="card in sakuraCards" :card="card" @click="addCard(card)"/>  
+        <a v-if="showLink">Pollas</a>
     </main>
 </template>
 
 <style>
+@import url('https://fonts.cdnfonts.com/css/sakura');
 
-/* body{
-    background-image: url(../images/tarotImage.jpg);
-    background-size:contain;
-    
-} */
-
+span{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  color: aqua;
+  font-size: 30px;
+  font-family: 'Sakura', sans-serif;
+  
+}
 main{
     height: 100vh;
     display: grid;
